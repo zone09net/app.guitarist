@@ -1,0 +1,25 @@
+{
+	"name": "@zone09.net/guitarist",
+  	"version": "1.0.0",
+	"description": "",
+  	"author": "Régis Côté",
+  	"license": "Proprietary",
+  	"homepage": "https://www.zone09.net",
+
+	"scripts": {
+		"clean:dist": "if exist .dist rmdir /s /q .dist",
+		"clean:rollup": "if exist .rollup rmdir /s /q .rollup",
+		"clean:obfuscator": "if exist .obfuscator rmdir /s /q .obfuscator",
+		"clean:minify": "if exist .minify rmdir /s /q .minify",
+		"clean": "concurrently --kill-others \"npm run clean:dist\" \"npm run clean:rollup\" \"npm run clean:obfuscator\" \"npm run clean:minify\"",
+		
+		"build": "type tsconfig.main.json > tsconfig.json && tsc --build --force",
+		"rollup": "rollup -c rollup.config.js",
+		"obfuscator": "javascript-obfuscator ./.rollup --output ./.obfuscator --compact true --string-array false --identifier-names-generator mangled --simplify true --exclude ./.rollup/extlib/**/**",
+		"minify": "if not exist .minify mkdir .minify && minify ./.rollup/app.guitarist.js > ./.minify/app.guitarist.js",
+		"dist": "npm run -s clean && npm run build && npm run -s rollup && npm run -s obfuscator && npm run -s minify",
+
+		"dev": "type tsconfig.dev.json > tsconfig.json && tsc --build --force && tsc-alias",
+		"watch": "type tsconfig.dev.json > tsconfig.json && concurrently --kill-others -p \"[{name}]\" -n \"watch,alias\" -c \"red.bold,yellow.bold\" \"tsc --build -w\" \"tsc-alias -w\""
+  	}
+}
