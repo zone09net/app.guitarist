@@ -2,7 +2,7 @@ export default [
 	{
 		input: './.dist/app.guitarist/src/app.guitarist.js',
 		output: {
-			format: 'es',
+			module: 'es',
 			file: './.rollup/app.guitarist.js',
 			paths: {
 				'@zone09.net/foundation': './lib.foundation.js',

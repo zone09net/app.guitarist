@@ -66,7 +66,6 @@ export class Guitarist
 			}
 		});
 
-		const sheet = new CSSStyleSheet();
 		const {
 			palette = {
 				black: '#000000',
@@ -94,7 +93,7 @@ export class Guitarist
 		const FretboardGuitar: IFretboard = {
 			...{
 				name: 'guitar',
-				artwork: '/assets/app.guitarist/guitar.jpg',
+				artwork: '/assets/app.guitarist/guitar.png',
 				colors: ['#c8af55', '#885D94', '#9a6c27',  '#436665','#815556', '#769050', '#595B8B'],
 				notes: {
 					x: [1442, 1368, 1263, 1168, 1074, 987, 906, 829, 756, 686, 620, 558, 501, 446, 393, 344, 298, 254, 212, 173, 136],
@@ -173,7 +172,7 @@ export class Guitarist
 		const FretboardUkulele: IFretboard = {
 			...{
 				name: 'ukulele',
-				artwork: '/assets/app.guitarist/ukulele.jpg',
+				artwork: '/assets/app.guitarist/ukulele.png',
 				colors: ['#c8af55', '#885D94', '#9a6c27',  '#436665','#815556', '#769050', '#595B8B'],
 				notes: {
 					x: [1005, 941, 871, 804, 739, 681, 624, 571, 521, 474, 428, 386, 347, 309, 274, 241, 209, 179, 150],
@@ -225,20 +224,6 @@ export class Guitarist
 
 		}
 
-		/*
-		sheet.replaceSync(`
-			body {
-				overflow: hidden;
-				background-color: ${ palette.grey0 };
-				margin: 0px;
-				padding: 0px;
-				image-rendering: pixelated;
-			}
-		`);
-		// @ts-ignore
-		document.adoptedStyleSheets = [sheet]
-		*/
-
 	  	this._assets = new Assets(palette);
 		this._attributes = {
 			palette: palette,
@@ -253,21 +238,6 @@ export class Guitarist
 				}
 			}
 		}
-
-		new Paperless.Drawables.Rectangle({
-			context: this._context,
-			point: {x: window.innerWidth / 2, y: window.innerHeight / 2},
-			size: {width: window.innerWidth, height: window.innerHeight},
-			nostroke: true,
-			fillcolor: '#151515',
-			onResize: (self?: Paperless.Drawable) => {
-				self.x = window.innerWidth / 2;
-				self.y = window.innerHeight / 2;
-				self.width = window.innerWidth;
-				self.height = window.innerHeight;
-				self.generate()
-			}
-		});
 
 		new Paperless.Controls.Button({
 			context: this._context,
@@ -333,6 +303,7 @@ export class Guitarist
 					onReady: (self: Stringed) => {
 						const chord = self.extractChord('A', 'minor', 0);
 						//self.showChord(chord);
+						//self.showCAGED('C');
 						self.fillFretboard();
 					}
 				});
@@ -355,7 +326,7 @@ export class Guitarist
 
 		this._stringed = new Stringed({
 			context: this._context,
-			fretboard: FretboardGuitar,
+			fretboard: FretboardUkulele,
 			tuning: 'standard',
 			onReady: (self: Stringed) => {
 				console.log('hit');
