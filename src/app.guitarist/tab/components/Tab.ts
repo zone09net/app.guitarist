@@ -28,7 +28,7 @@ export class Tab extends Paperless.Component
 			point: {x: 16, y: 16},
 			size: {width: 1664, height: window.innerHeight - 16},
 			hop: 16, 
-			expandable: false,
+			expandable: {width: false, height: false},
 			nofill: false,
 			nostroke: false,
 			linewidth: 2,
