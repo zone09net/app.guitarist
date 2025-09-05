@@ -26,6 +26,7 @@ git clone http://github.com/lib.foundation
 git clone http://github.com/lib.paperless
 git clone http://github.com/lib.hac
 git clone http://github.com/app.guitarist
+```
 
 Distribution file can be generated with:
 
